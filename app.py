@@ -608,10 +608,10 @@ elif page == "Dashboard":
                 labels=category_counts.index,
                 autopct="%1.1f%%",
                 startangle=90,
-                radius=0.68,
+                radius=0.70,
                 wedgeprops={
-                    "edgecolor": chart_background,
-                    "linewidth": 0.5
+                    "edgecolor": black,
+                    "linewidth": 0.3
                 },
                 textprops={
                     "fontsize": 6,
