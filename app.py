@@ -649,27 +649,7 @@ elif page == "Dashboard":
                 color=chart_text
             )
 
-            ax.text(
-                0,
-                0.08,
-                "Performance",
-                ha="center",
-                va="center",
-                fontsize=8,
-                fontweight="bold",
-                color=chart_text
-            )
-
-            ax.text(
-                0,
-                -0.10,
-                "Distribution",
-                ha="center",
-                va="center",
-                fontsize=7,
-                color=chart_text
-            )
-
+    
             ax.set_aspect("equal")
 
             fig.tight_layout(
