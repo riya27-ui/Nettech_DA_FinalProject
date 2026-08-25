@@ -304,6 +304,126 @@ elif page == "Dashboard":
         )
 
     st.write("")
+
+    st.markdown(
+        "### :material/download: Export Dashboard Summary"
+    )
+
+    dashboard_report = StringIO()
+
+    dashboard_report.write(
+        "NETTECH EMPLOYEE ANALYTICS\n"
+    )
+
+    dashboard_report.write(
+        "DASHBOARD SUMMARY REPORT\n\n"
+    )
+
+    dashboard_report.write(
+        "Applied Filters\n"
+    )
+
+    dashboard_report.write(
+        f"Department,{selected_department}\n"
+    )
+
+    dashboard_report.write(
+        f"Performance Category,{selected_category}\n\n"
+    )
+
+    dashboard_report.write(
+        "Key Performance Indicators\n"
+    )
+
+    dashboard_report.write(
+        f"Total Employees,{total_employees}\n"
+    )
+
+    dashboard_report.write(
+        f"Average Attendance,{average_attendance:.2f}%\n"
+    )
+
+    dashboard_report.write(
+        f"Average Performance,{average_performance:.2f}\n"
+    )
+
+    dashboard_report.write(
+        f"Average Salary,₹{average_salary:,.0f}\n"
+    )
+
+    dashboard_report.write(
+        f"Total Projects,{total_projects:,.0f}\n\n"
+    )
+
+    dashboard_report.write(
+        "Department Analysis\n"
+    )
+
+    if (
+        len(filtered_df) > 0
+        and "Employee Name" in filtered_df.columns
+    ):
+
+        department_summary = (
+            filtered_df
+            .groupby("Department")
+            .agg(
+                Employees=("Employee Name", "count"),
+                Average_Performance=("Performance Score", "mean"),
+                Average_Attendance=("Attendance %", "mean"),
+                Total_Projects=("Projects Completed", "sum"),
+                Average_Salary=("Salary", "mean")
+            )
+            .round(2)
+        )
+
+        dashboard_report.write(
+            department_summary.to_csv()
+        )
+
+    dashboard_report.write(
+        "\nPerformance Category Distribution\n"
+    )
+
+    category_summary = (
+        filtered_df["Performance Category"]
+        .value_counts()
+        .rename_axis("Performance Category")
+        .reset_index(name="Employees")
+    )
+
+    dashboard_report.write(
+        category_summary.to_csv(index=False)
+    )
+
+    dashboard_report.write(
+        "\nCorrelation Matrix\n"
+    )
+
+    numeric_columns = filtered_df.select_dtypes(
+        include=np.number
+    ).columns
+
+    if len(numeric_columns) >= 2:
+
+        correlation_matrix = (
+            filtered_df[numeric_columns]
+            .corr()
+            .round(2)
+        )
+
+        dashboard_report.write(
+            correlation_matrix.to_csv()
+        )
+
+    st.download_button(
+        label=":material/download: Download Dashboard Summary",
+        data=dashboard_report.getvalue(),
+        file_name="Nettech_Dashboard_Summary_Report.csv",
+        mime="text/csv"
+    )
+
+    st.write("")
     st.markdown("### :material/bar_chart: Department Analysis")
 
     chart_col1, chart_col2 = st.columns(2)
@@ -761,15 +881,29 @@ elif page == "Upload CSV":
 
             report = StringIO()
 
-            report.write("NETTECH EMPLOYEE ANALYTICS - SUMMARY REPORT\n\n")
-            report.write("Dataset Overview\n")
-            report.write(f"Rows,{len(uploaded_df)}\n")
-            report.write(f"Columns,{len(uploaded_df.columns)}\n")
+            report.write(
+                "NETTECH EMPLOYEE ANALYTICS - SUMMARY REPORT\n\n"
+            )
+
+            report.write(
+                "Dataset Overview\n"
+            )
+
+            report.write(
+                f"Rows,{len(uploaded_df)}\n"
+            )
+
+            report.write(
+                f"Columns,{len(uploaded_df.columns)}\n"
+            )
+
             report.write(
                 f"Missing Values,{int(uploaded_df.isnull().sum().sum())}\n\n"
             )
 
-            report.write("Numeric Summary\n")
+            report.write(
+                "Numeric Summary\n"
+            )
 
             summary.to_csv(report)
 
