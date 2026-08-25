@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from io import StringIO
 
 st.set_page_config(
     page_title="NETTECH EMPLOYEE ANALYTICS",
@@ -314,7 +315,7 @@ elif page == "Dashboard":
 
             department_counts = filtered_df["Department"].value_counts()
 
-            fig, ax = plt.subplots(figsize=(4.2, 2.6))
+            fig, ax = plt.subplots(figsize=(3.6, 2.2))
 
             fig.patch.set_facecolor(chart_background)
             ax.set_facecolor(chart_background)
@@ -329,31 +330,31 @@ elif page == "Dashboard":
             ax.set_xlabel(
                 "Department",
                 color=chart_text,
-                fontsize=9
+                fontsize=8
             )
 
             ax.set_ylabel(
                 "Employees",
                 color=chart_text,
-                fontsize=9
+                fontsize=8
             )
 
             ax.tick_params(
                 axis="x",
                 colors=chart_text,
-                labelsize=8
+                labelsize=7
             )
 
             ax.tick_params(
                 axis="y",
                 colors=chart_text,
-                labelsize=8
+                labelsize=7
             )
 
             for spine in ax.spines.values():
                 spine.set_color(chart_grid)
 
-            fig.tight_layout(pad=0.7)
+            fig.tight_layout(pad=0.5)
 
             st.pyplot(fig, width="content")
 
@@ -373,7 +374,7 @@ elif page == "Dashboard":
                 .sort_values(ascending=False)
             )
 
-            fig, ax = plt.subplots(figsize=(4.2, 2.6))
+            fig, ax = plt.subplots(figsize=(3.6, 2.2))
 
             fig.patch.set_facecolor(chart_background)
             ax.set_facecolor(chart_background)
@@ -388,13 +389,13 @@ elif page == "Dashboard":
             ax.set_xlabel(
                 "Department",
                 color=chart_text,
-                fontsize=9
+                fontsize=8
             )
 
             ax.set_ylabel(
                 "Performance Score",
                 color=chart_text,
-                fontsize=9
+                fontsize=8
             )
 
             ax.set_ylim(0, 10)
@@ -402,19 +403,19 @@ elif page == "Dashboard":
             ax.tick_params(
                 axis="x",
                 colors=chart_text,
-                labelsize=8
+                labelsize=7
             )
 
             ax.tick_params(
                 axis="y",
                 colors=chart_text,
-                labelsize=8
+                labelsize=7
             )
 
             for spine in ax.spines.values():
                 spine.set_color(chart_grid)
 
-            fig.tight_layout(pad=0.7)
+            fig.tight_layout(pad=0.5)
 
             st.pyplot(fig, width="content")
 
@@ -436,7 +437,7 @@ elif page == "Dashboard":
                 .value_counts()
             )
 
-            fig, ax = plt.subplots(figsize=(4.2, 2.6))
+            fig, ax = plt.subplots(figsize=(3.6, 2.2))
 
             fig.patch.set_facecolor(chart_background)
             ax.set_facecolor(chart_background)
@@ -446,20 +447,20 @@ elif page == "Dashboard":
                 labels=category_counts.index,
                 autopct="%1.1f%%",
                 startangle=90,
-                radius=0.82,
+                radius=0.72,
                 wedgeprops={
                     "edgecolor": chart_background,
                     "linewidth": 0.6
                 },
                 textprops={
-                    "fontsize": 8,
+                    "fontsize": 7,
                     "color": chart_text
                 }
             )
 
             ax.set_aspect("equal")
 
-            fig.tight_layout(pad=0.4)
+            fig.tight_layout(pad=0.3)
 
             st.pyplot(fig, width="content")
 
@@ -492,7 +493,7 @@ elif page == "Dashboard":
                 ],
                 use_container_width=True,
                 hide_index=True,
-                height=220
+                height=190
             )
 
     st.write("")
@@ -507,7 +508,7 @@ elif page == "Dashboard":
                 "#### :material/event_available: Attendance vs Performance"
             )
 
-            fig, ax = plt.subplots(figsize=(4.2, 2.6))
+            fig, ax = plt.subplots(figsize=(3.6, 2.2))
 
             fig.patch.set_facecolor(chart_background)
             ax.set_facecolor(chart_background)
@@ -517,19 +518,19 @@ elif page == "Dashboard":
                 filtered_df["Performance Score"],
                 color=royal_blue,
                 alpha=0.7,
-                s=28
+                s=22
             )
 
             ax.set_xlabel(
                 "Attendance %",
                 color=chart_text,
-                fontsize=9
+                fontsize=8
             )
 
             ax.set_ylabel(
                 "Performance Score",
                 color=chart_text,
-                fontsize=9
+                fontsize=8
             )
 
             ax.set_ylim(0, 10)
@@ -537,19 +538,19 @@ elif page == "Dashboard":
             ax.tick_params(
                 axis="x",
                 colors=chart_text,
-                labelsize=8
+                labelsize=7
             )
 
             ax.tick_params(
                 axis="y",
                 colors=chart_text,
-                labelsize=8
+                labelsize=7
             )
 
             for spine in ax.spines.values():
                 spine.set_color(chart_grid)
 
-            fig.tight_layout(pad=0.7)
+            fig.tight_layout(pad=0.5)
 
             st.pyplot(fig, width="content")
 
@@ -562,7 +563,7 @@ elif page == "Dashboard":
                 "#### :material/task_alt: Projects vs Performance"
             )
 
-            fig, ax = plt.subplots(figsize=(4.2, 2.6))
+            fig, ax = plt.subplots(figsize=(3.6, 2.2))
 
             fig.patch.set_facecolor(chart_background)
             ax.set_facecolor(chart_background)
@@ -572,19 +573,19 @@ elif page == "Dashboard":
                 filtered_df["Performance Score"],
                 color=royal_blue,
                 alpha=0.7,
-                s=28
+                s=22
             )
 
             ax.set_xlabel(
                 "Projects Completed",
                 color=chart_text,
-                fontsize=9
+                fontsize=8
             )
 
             ax.set_ylabel(
                 "Performance Score",
                 color=chart_text,
-                fontsize=9
+                fontsize=8
             )
 
             ax.set_ylim(0, 10)
@@ -592,23 +593,93 @@ elif page == "Dashboard":
             ax.tick_params(
                 axis="x",
                 colors=chart_text,
-                labelsize=8
+                labelsize=7
             )
 
             ax.tick_params(
                 axis="y",
                 colors=chart_text,
-                labelsize=8
+                labelsize=7
             )
 
             for spine in ax.spines.values():
                 spine.set_color(chart_grid)
 
-            fig.tight_layout(pad=0.7)
+            fig.tight_layout(pad=0.5)
 
             st.pyplot(fig, width="content")
 
             plt.close(fig)
+
+    st.write("")
+    st.markdown("### :material/grid_on: Correlation Heatmap")
+
+    numeric_columns = filtered_df.select_dtypes(
+        include=np.number
+    ).columns
+
+    if len(numeric_columns) >= 2:
+
+        correlation_matrix = filtered_df[numeric_columns].corr()
+
+        fig, ax = plt.subplots(figsize=(6.5, 3.2))
+
+        fig.patch.set_facecolor(chart_background)
+        ax.set_facecolor(chart_background)
+
+        heatmap = ax.imshow(
+            correlation_matrix,
+            cmap="Blues",
+            vmin=-1,
+            vmax=1
+        )
+
+        ax.set_xticks(
+            range(len(correlation_matrix.columns))
+        )
+
+        ax.set_yticks(
+            range(len(correlation_matrix.columns))
+        )
+
+        ax.set_xticklabels(
+            correlation_matrix.columns,
+            rotation=45,
+            ha="right",
+            fontsize=8,
+            color=chart_text
+        )
+
+        ax.set_yticklabels(
+            correlation_matrix.columns,
+            fontsize=8,
+            color=chart_text
+        )
+
+        for i in range(len(correlation_matrix.columns)):
+            for j in range(len(correlation_matrix.columns)):
+                ax.text(
+                    j,
+                    i,
+                    f"{correlation_matrix.iloc[i, j]:.2f}",
+                    ha="center",
+                    va="center",
+                    fontsize=8,
+                    color=chart_text
+                )
+
+        fig.colorbar(
+            heatmap,
+            ax=ax,
+            fraction=0.035,
+            pad=0.04
+        )
+
+        fig.tight_layout(pad=0.6)
+
+        st.pyplot(fig, width="content")
+
+        plt.close(fig)
 
 
 elif page == "Upload CSV":
@@ -671,7 +742,6 @@ elif page == "Upload CSV":
             hide_index=True
         )
 
-
         numeric_columns = uploaded_df.select_dtypes(
             include=np.number
         ).columns
@@ -680,13 +750,37 @@ elif page == "Upload CSV":
 
             summary = uploaded_df[numeric_columns].describe().T
 
+            st.markdown(
+                "### :material/summarize: Dataset Summary"
+            )
+
             st.dataframe(
                 summary,
                 use_container_width=True
             )
 
-        
-        
+            report = StringIO()
+
+            report.write("NETTECH EMPLOYEE ANALYTICS - SUMMARY REPORT\n\n")
+            report.write("Dataset Overview\n")
+            report.write(f"Rows,{len(uploaded_df)}\n")
+            report.write(f"Columns,{len(uploaded_df.columns)}\n")
+            report.write(
+                f"Missing Values,{int(uploaded_df.isnull().sum().sum())}\n\n"
+            )
+
+            report.write("Numeric Summary\n")
+
+            summary.to_csv(report)
+
+            st.download_button(
+                label=":material/download: Download Summary Report",
+                data=report.getvalue(),
+                file_name="Nettech_Employee_Summary_Report.csv",
+                mime="text/csv"
+            )
+
+
 elif page == "About":
 
     st.title("About Nettech Employee Analytics")
@@ -746,6 +840,7 @@ elif page == "About":
     st.markdown(
         "### :material/note:NOTE:"
     )
+
     st.write(
         "THE DATASET USED IN THIS PROJECT TO MAKE THE DASHBOARD IS CREATED BY VARIOUS SOURCES AND IS NOT THE ACTUAL DATA"
     )
