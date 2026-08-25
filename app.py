@@ -359,27 +359,22 @@ elif page == "Dashboard":
         "Department Analysis\n"
     )
 
-    if (
-        len(filtered_df) > 0
-        and "Employee Name" in filtered_df.columns
-    ):
-
-        department_summary = (
-            filtered_df
-            .groupby("Department")
-            .agg(
-                Employees=("Employee Name", "count"),
-                Average_Performance=("Performance Score", "mean"),
-                Average_Attendance=("Attendance %", "mean"),
-                Total_Projects=("Projects Completed", "sum"),
-                Average_Salary=("Salary", "mean")
-            )
-            .round(2)
+    department_summary = (
+        filtered_df
+        .groupby("Department")
+        .agg(
+            Employees=("Employee Name", "count"),
+            Average_Performance=("Performance Score", "mean"),
+            Average_Attendance=("Attendance %", "mean"),
+            Total_Projects=("Projects Completed", "sum"),
+            Average_Salary=("Salary", "mean")
         )
+        .round(2)
+    )
 
-        dashboard_report.write(
-            department_summary.to_csv()
-        )
+    dashboard_report.write(
+        department_summary.to_csv()
+    )
 
     dashboard_report.write(
         "\nPerformance Category Distribution\n"
@@ -417,66 +412,88 @@ elif page == "Dashboard":
         )
 
     st.download_button(
-        label=":material/save: Download Summary Report",
+        label=":material/download: Download Dashboard Summary",
         data=dashboard_report.getvalue(),
         file_name="Nettech_Dashboard_Summary_Report.csv",
         mime="text/csv"
     )
 
     st.write("")
-    st.markdown("### :material/bar_chart: Department Analysis")
+
+    st.markdown(
+        "### :material/bar_chart: Department Analysis"
+    )
 
     chart_col1, chart_col2 = st.columns(2)
 
     with chart_col1:
         with st.container(border=True):
 
-            st.markdown("#### :material/groups: Employee Distribution")
+            st.markdown(
+                "#### :material/groups: Employee Distribution"
+            )
 
-            department_counts = filtered_df["Department"].value_counts()
+            department_counts = (
+                filtered_df["Department"]
+                .value_counts()
+            )
 
-            fig, ax = plt.subplots(figsize=(3.6, 2.2))
+            fig, ax = plt.subplots(
+                figsize=(3.2, 1.9)
+            )
 
-            fig.patch.set_facecolor(chart_background)
-            ax.set_facecolor(chart_background)
+            fig.patch.set_facecolor(
+                chart_background
+            )
+
+            ax.set_facecolor(
+                chart_background
+            )
 
             department_counts.plot(
                 kind="bar",
                 ax=ax,
                 color=royal_blue,
-                width=0.62
+                width=0.58
             )
 
             ax.set_xlabel(
                 "Department",
                 color=chart_text,
-                fontsize=8
+                fontsize=7
             )
 
             ax.set_ylabel(
                 "Employees",
                 color=chart_text,
-                fontsize=8
+                fontsize=7
             )
 
             ax.tick_params(
                 axis="x",
                 colors=chart_text,
-                labelsize=7
+                labelsize=6
             )
 
             ax.tick_params(
                 axis="y",
                 colors=chart_text,
-                labelsize=7
+                labelsize=6
             )
 
             for spine in ax.spines.values():
-                spine.set_color(chart_grid)
+                spine.set_color(
+                    chart_grid
+                )
 
-            fig.tight_layout(pad=0.5)
+            fig.tight_layout(
+                pad=0.35
+            )
 
-            st.pyplot(fig, width="content")
+            st.pyplot(
+                fig,
+                width="content"
+            )
 
             plt.close(fig)
 
@@ -494,50 +511,67 @@ elif page == "Dashboard":
                 .sort_values(ascending=False)
             )
 
-            fig, ax = plt.subplots(figsize=(3.6, 2.2))
+            fig, ax = plt.subplots(
+                figsize=(3.2, 1.9)
+            )
 
-            fig.patch.set_facecolor(chart_background)
-            ax.set_facecolor(chart_background)
+            fig.patch.set_facecolor(
+                chart_background
+            )
+
+            ax.set_facecolor(
+                chart_background
+            )
 
             avg_performance_department.plot(
                 kind="bar",
                 ax=ax,
                 color=royal_blue,
-                width=0.62
+                width=0.58
             )
 
             ax.set_xlabel(
                 "Department",
                 color=chart_text,
-                fontsize=8
+                fontsize=7
             )
 
             ax.set_ylabel(
                 "Performance Score",
                 color=chart_text,
-                fontsize=8
+                fontsize=7
             )
 
-            ax.set_ylim(0, 10)
+            ax.set_ylim(
+                0,
+                10
+            )
 
             ax.tick_params(
                 axis="x",
                 colors=chart_text,
-                labelsize=7
+                labelsize=6
             )
 
             ax.tick_params(
                 axis="y",
                 colors=chart_text,
-                labelsize=7
+                labelsize=6
             )
 
             for spine in ax.spines.values():
-                spine.set_color(chart_grid)
+                spine.set_color(
+                    chart_grid
+                )
 
-            fig.tight_layout(pad=0.5)
+            fig.tight_layout(
+                pad=0.35
+            )
 
-            st.pyplot(fig, width="content")
+            st.pyplot(
+                fig,
+                width="content"
+            )
 
             plt.close(fig)
 
@@ -557,32 +591,46 @@ elif page == "Dashboard":
                 .value_counts()
             )
 
-            fig, ax = plt.subplots(figsize=(3.6, 2.2))
+            fig, ax = plt.subplots(
+                figsize=(3.2, 1.9)
+            )
 
-            fig.patch.set_facecolor(chart_background)
-            ax.set_facecolor(chart_background)
+            fig.patch.set_facecolor(
+                chart_background
+            )
+
+            ax.set_facecolor(
+                chart_background
+            )
 
             ax.pie(
                 category_counts.values,
                 labels=category_counts.index,
                 autopct="%1.1f%%",
                 startangle=90,
-                radius=0.72,
+                radius=0.68,
                 wedgeprops={
                     "edgecolor": chart_background,
-                    "linewidth": 0.6
+                    "linewidth": 0.5
                 },
                 textprops={
-                    "fontsize": 7,
+                    "fontsize": 6,
                     "color": chart_text
                 }
             )
 
-            ax.set_aspect("equal")
+            ax.set_aspect(
+                "equal"
+            )
 
-            fig.tight_layout(pad=0.3)
+            fig.tight_layout(
+                pad=0.2
+            )
 
-            st.pyplot(fig, width="content")
+            st.pyplot(
+                fig,
+                width="content"
+            )
 
             plt.close(fig)
 
@@ -613,11 +661,14 @@ elif page == "Dashboard":
                 ],
                 use_container_width=True,
                 hide_index=True,
-                height=190
+                height=175
             )
 
     st.write("")
-    st.markdown("### :material/compare_arrows: Performance Relationships")
+
+    st.markdown(
+        "### :material/compare_arrows: Performance Relationships"
+    )
 
     relation_col1, relation_col2 = st.columns(2)
 
@@ -628,51 +679,68 @@ elif page == "Dashboard":
                 "#### :material/event_available: Attendance vs Performance"
             )
 
-            fig, ax = plt.subplots(figsize=(3.6, 2.2))
+            fig, ax = plt.subplots(
+                figsize=(3.2, 1.9)
+            )
 
-            fig.patch.set_facecolor(chart_background)
-            ax.set_facecolor(chart_background)
+            fig.patch.set_facecolor(
+                chart_background
+            )
+
+            ax.set_facecolor(
+                chart_background
+            )
 
             ax.scatter(
                 filtered_df["Attendance %"],
                 filtered_df["Performance Score"],
                 color=royal_blue,
                 alpha=0.7,
-                s=22
+                s=18
             )
 
             ax.set_xlabel(
                 "Attendance %",
                 color=chart_text,
-                fontsize=8
+                fontsize=7
             )
 
             ax.set_ylabel(
                 "Performance Score",
                 color=chart_text,
-                fontsize=8
+                fontsize=7
             )
 
-            ax.set_ylim(0, 10)
+            ax.set_ylim(
+                0,
+                10
+            )
 
             ax.tick_params(
                 axis="x",
                 colors=chart_text,
-                labelsize=7
+                labelsize=6
             )
 
             ax.tick_params(
                 axis="y",
                 colors=chart_text,
-                labelsize=7
+                labelsize=6
             )
 
             for spine in ax.spines.values():
-                spine.set_color(chart_grid)
+                spine.set_color(
+                    chart_grid
+                )
 
-            fig.tight_layout(pad=0.5)
+            fig.tight_layout(
+                pad=0.35
+            )
 
-            st.pyplot(fig, width="content")
+            st.pyplot(
+                fig,
+                width="content"
+            )
 
             plt.close(fig)
 
@@ -683,56 +751,76 @@ elif page == "Dashboard":
                 "#### :material/task_alt: Projects vs Performance"
             )
 
-            fig, ax = plt.subplots(figsize=(3.6, 2.2))
+            fig, ax = plt.subplots(
+                figsize=(3.2, 1.9)
+            )
 
-            fig.patch.set_facecolor(chart_background)
-            ax.set_facecolor(chart_background)
+            fig.patch.set_facecolor(
+                chart_background
+            )
+
+            ax.set_facecolor(
+                chart_background
+            )
 
             ax.scatter(
                 filtered_df["Projects Completed"],
                 filtered_df["Performance Score"],
                 color=royal_blue,
                 alpha=0.7,
-                s=22
+                s=18
             )
 
             ax.set_xlabel(
                 "Projects Completed",
                 color=chart_text,
-                fontsize=8
+                fontsize=7
             )
 
             ax.set_ylabel(
                 "Performance Score",
                 color=chart_text,
-                fontsize=8
+                fontsize=7
             )
 
-            ax.set_ylim(0, 10)
+            ax.set_ylim(
+                0,
+                10
+            )
 
             ax.tick_params(
                 axis="x",
                 colors=chart_text,
-                labelsize=7
+                labelsize=6
             )
 
             ax.tick_params(
                 axis="y",
                 colors=chart_text,
-                labelsize=7
+                labelsize=6
             )
 
             for spine in ax.spines.values():
-                spine.set_color(chart_grid)
+                spine.set_color(
+                    chart_grid
+                )
 
-            fig.tight_layout(pad=0.5)
+            fig.tight_layout(
+                pad=0.35
+            )
 
-            st.pyplot(fig, width="content")
+            st.pyplot(
+                fig,
+                width="content"
+            )
 
             plt.close(fig)
 
     st.write("")
-    st.markdown("### :material/grid_on: Correlation Heatmap")
+
+    st.markdown(
+        "### :material/grid_on: Correlation Heatmap"
+    )
 
     numeric_columns = filtered_df.select_dtypes(
         include=np.number
@@ -740,12 +828,22 @@ elif page == "Dashboard":
 
     if len(numeric_columns) >= 2:
 
-        correlation_matrix = filtered_df[numeric_columns].corr()
+        correlation_matrix = (
+            filtered_df[numeric_columns]
+            .corr()
+        )
 
-        fig, ax = plt.subplots(figsize=(6.5, 3.2))
+        fig, ax = plt.subplots(
+            figsize=(5.5, 2.8)
+        )
 
-        fig.patch.set_facecolor(chart_background)
-        ax.set_facecolor(chart_background)
+        fig.patch.set_facecolor(
+            chart_background
+        )
+
+        ax.set_facecolor(
+            chart_background
+        )
 
         heatmap = ax.imshow(
             correlation_matrix,
@@ -766,25 +864,29 @@ elif page == "Dashboard":
             correlation_matrix.columns,
             rotation=45,
             ha="right",
-            fontsize=8,
+            fontsize=7,
             color=chart_text
         )
 
         ax.set_yticklabels(
             correlation_matrix.columns,
-            fontsize=8,
+            fontsize=7,
             color=chart_text
         )
 
-        for i in range(len(correlation_matrix.columns)):
-            for j in range(len(correlation_matrix.columns)):
+        for i in range(
+            len(correlation_matrix.columns)
+        ):
+            for j in range(
+                len(correlation_matrix.columns)
+            ):
                 ax.text(
                     j,
                     i,
                     f"{correlation_matrix.iloc[i, j]:.2f}",
                     ha="center",
                     va="center",
-                    fontsize=8,
+                    fontsize=7,
                     color=chart_text
                 )
 
@@ -795,9 +897,14 @@ elif page == "Dashboard":
             pad=0.04
         )
 
-        fig.tight_layout(pad=0.6)
+        fig.tight_layout(
+            pad=0.5
+        )
 
-        st.pyplot(fig, width="content")
+        st.pyplot(
+            fig,
+            width="content"
+        )
 
         plt.close(fig)
 
@@ -905,12 +1012,14 @@ elif page == "Upload CSV":
                 "Numeric Summary\n"
             )
 
-            summary.to_csv(report)
+            summary.to_csv(
+                report
+            )
 
             st.download_button(
-                label=":material/download: Download Summary Report",
+                label=":material/save: Download Summary Report",
                 data=report.getvalue(),
-                file_name="Nettech_Employee_Summary_Report.csv",
+                file_name="Summary_Report.csv",
                 mime="text/csv"
             )
 
