@@ -610,7 +610,7 @@ elif page == "Dashboard":
                 startangle=90,
                 radius=0.70,
                 wedgeprops={
-                    "edgecolor": black,
+                    "edgecolor": chart_background,
                     "linewidth": 0.3
                 },
                 textprops={
