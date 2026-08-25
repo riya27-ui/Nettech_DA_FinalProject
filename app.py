@@ -417,7 +417,7 @@ elif page == "Dashboard":
         )
 
     st.download_button(
-        label=":material/download: Download Dashboard Summary",
+        label=":material/save: Download Summary Report",
         data=dashboard_report.getvalue(),
         file_name="Nettech_Dashboard_Summary_Report.csv",
         mime="text/csv"
