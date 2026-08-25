@@ -105,8 +105,7 @@ with st.sidebar:
         label_visibility="collapsed"
     )
 
-df = pd.read_csv("Employee_Performance_Dataset.csv")
-
+df = pd.read_csv("Employee_Performance_Dataset - Nettech_Employee_Performance_Dataset (1).csv")
 
 def categorize_performance(score):
     if score >= 7:
