@@ -106,7 +106,10 @@ with st.sidebar:
         label_visibility="collapsed"
     )
 
-df = pd.read_csv("Employee_Performance_Dataset - Nettech_Employee_Performance_Dataset (1).csv")
+df = pd.read_csv(
+    "Employee_Performance_Dataset - Nettech_Employee_Performance_Dataset (1).csv"
+)
+
 
 def categorize_performance(score):
     if score >= 7:
@@ -127,9 +130,11 @@ df["Performance Category"] = df["Performance Score"].apply(
 
 
 if page == "Home":
-    
+
     st.title("!!WELCOME!!")
-    st.title("\n To The Nettech Employee Dashboard Analytics",)
+    st.title(
+        "\n To The Nettech Employee Dashboard Analytics",
+    )
 
     st.write(
         "An interactive employee analytics platform to explore "
@@ -142,7 +147,9 @@ if page == "Home":
 
     with col1:
         with st.container(border=True):
-            st.markdown("### :material/groups: Employee Insights")
+            st.markdown(
+                "### :material/groups: Employee Insights"
+            )
             st.write(
                 "Explore employee performance and workforce metrics "
                 "through interactive visualizations."
@@ -150,7 +157,9 @@ if page == "Home":
 
     with col2:
         with st.container(border=True):
-            st.markdown("### :material/dashboard: Interactive Dashboard")
+            st.markdown(
+                "### :material/dashboard: Interactive Dashboard"
+            )
             st.write(
                 "Filter employees by department and performance category "
                 "to explore detailed insights."
@@ -158,7 +167,9 @@ if page == "Home":
 
     with col3:
         with st.container(border=True):
-            st.markdown("### :material/upload_file: CSV Analysis")
+            st.markdown(
+                "### :material/upload_file: CSV Analysis"
+            )
             st.write(
                 "Upload an employee dataset and generate an automated "
                 "summary and visual analysis that makes the data easier "
@@ -592,7 +603,7 @@ elif page == "Dashboard":
             )
 
             fig, ax = plt.subplots(
-                figsize=(3.2, 1.9)
+                figsize=(3.2, 2.1)
             )
 
             fig.patch.set_facecolor(
@@ -603,28 +614,66 @@ elif page == "Dashboard":
                 chart_background
             )
 
-            ax.pie(
+            wedges, _ = ax.pie(
                 category_counts.values,
-                labels=category_counts.index,
-                autopct="%1.1f%%",
                 startangle=90,
-                radius=0.70,
+                radius=0.78,
                 wedgeprops={
+                    "width": 0.38,
                     "edgecolor": chart_background,
-                    "linewidth": 0.3
-                },
-                textprops={
-                    "fontsize": 6,
-                    "color": chart_text
+                    "linewidth": 1
                 }
             )
 
-            ax.set_aspect(
-                "equal"
+            total_categories = category_counts.sum()
+
+            legend_labels = [
+                f"{category}  {value / total_categories * 100:.1f}%"
+                for category, value in category_counts.items()
+            ]
+
+            legend = ax.legend(
+                wedges,
+                legend_labels,
+                title="Performance Category",
+                loc="center left",
+                bbox_to_anchor=(1.00, 0.50),
+                fontsize=6.5,
+                title_fontsize=7,
+                frameon=False,
+                labelcolor=chart_text
             )
 
+            plt.setp(
+                legend.get_title(),
+                color=chart_text
+            )
+
+            ax.text(
+                0,
+                0.08,
+                "Performance",
+                ha="center",
+                va="center",
+                fontsize=8,
+                fontweight="bold",
+                color=chart_text
+            )
+
+            ax.text(
+                0,
+                -0.10,
+                "Distribution",
+                ha="center",
+                va="center",
+                fontsize=7,
+                color=chart_text
+            )
+
+            ax.set_aspect("equal")
+
             fig.tight_layout(
-                pad=0.2
+                pad=0.3
             )
 
             st.pyplot(
@@ -915,7 +964,6 @@ elif page == "Upload CSV":
 
     st.write(
         "Upload a CSV file to generate an automatic summary "
-        
     )
 
     st.markdown(
@@ -1070,7 +1118,7 @@ elif page == "About":
         "top-performer analysis."
         "Charts like Bar chart,pie chart,scatter plot chart is used."
     )
-    
+
     st.markdown(
         "### :material/create: CREATED BY:"
     )
