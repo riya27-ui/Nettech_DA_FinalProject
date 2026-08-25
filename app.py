@@ -742,3 +742,10 @@ elif page == "About":
         "Miss.Riya Bhosle ,"
         "NetTech-India Data-analyst Intern."
     )
+
+    st.markdown(
+        "### :material/extra:NOTE:"
+    )
+    st.write(
+        "THE DATASET USED IN THIS PROJECT TO MAKE THE DASHBOARD IS CREATED BY VARIOUS SOURCES AND IS NOT THE ACTUAL DATA"
+    )
