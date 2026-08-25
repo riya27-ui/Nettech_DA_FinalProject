@@ -423,16 +423,16 @@ elif page == "Dashboard":
         )
 
     st.download_button(
-        label=":material/download: Download Dashboard Summary",
+        label=":material/save: Download Summary Report",
         data=dashboard_report.getvalue(),
-        file_name="Nettech_Dashboard_Summary_Report.csv",
+        file_name="Summary_Report.csv",
         mime="text/csv"
     )
 
     st.write("")
 
     st.markdown(
-        "### :material/bar_chart: Department Analysis"
+        "### :material/bar_chart: Department-wise Analysis"
     )
 
     chart_col1, chart_col2 = st.columns(2)
@@ -441,7 +441,7 @@ elif page == "Dashboard":
         with st.container(border=True):
 
             st.markdown(
-                "#### :material/groups: Employee Distribution"
+                "#### :material/groups: Employee Distribution By Department"
             )
 
             department_counts = (
@@ -512,7 +512,7 @@ elif page == "Dashboard":
         with st.container(border=True):
 
             st.markdown(
-                "#### :material/analytics: Department Performance"
+                "#### :material/analytics: Department-wise Performance"
             )
 
             avg_performance_department = (
@@ -594,7 +594,7 @@ elif page == "Dashboard":
         with st.container(border=True):
 
             st.markdown(
-                "#### :material/donut_large: Performance Distribution"
+                "#### :material/donut_large: Performance Distribution (bad-excellent)"
             )
 
             category_counts = (
