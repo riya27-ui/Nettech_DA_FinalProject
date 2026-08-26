@@ -539,10 +539,36 @@ elif page == "Dashboard":
                 fontsize=7
             )
 
-            ax.set_ylim(
+            minimum_score = avg_performance_department.min()
+            maximum_score = avg_performance_department.max()
+
+            lower_limit = max(
                 0,
-                10
+                minimum_score - 0.5
             )
+
+            upper_limit = min(
+                10,
+                maximum_score + 0.5
+            )
+
+            ax.set_ylim(
+                lower_limit,
+                upper_limit
+            )
+
+            for i, value in enumerate(
+                avg_performance_department.values
+            ):
+                ax.text(
+                    i,
+                    value + 0.05,
+                    f"{value:.2f}",
+                    ha="center",
+                    va="bottom",
+                    fontsize=7,
+                    color=chart_text
+                )
 
             ax.tick_params(
                 axis="x",
