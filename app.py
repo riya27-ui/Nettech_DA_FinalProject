@@ -925,51 +925,51 @@ elif page == "Dashboard":
 
         
 
-            st.markdown(
-                "### :material/summarize: Dataset Summary"
-            )
+        st.markdown(
+            "### :material/summarize: Dataset Summary"
+         )
 
-            st.dataframe(
-                summary,
-                use_container_width=True
-            )
+        st.dataframe(
+            summary,
+            use_container_width=True
+        )
 
-            report = StringIO()
+        report = StringIO()
 
-            report.write(
-                "NETTECH EMPLOYEE ANALYTICS - SUMMARY REPORT\n\n"
-            )
+        report.write(
+            "NETTECH EMPLOYEE ANALYTICS - SUMMARY REPORT\n\n"
+        )
 
-            report.write(
-                "Dataset Overview\n"
-            )
+        report.write(
+            "Dataset Overview\n"
+        )
 
-            report.write(
-                f"Rows,{len(uploaded_df)}\n"
-            )
+        report.write(
+            f"Rows,{len(uploaded_df)}\n"
+        )
 
-            report.write(
-                f"Columns,{len(uploaded_df.columns)}\n"
-            )
+        report.write(
+            f"Columns,{len(uploaded_df.columns)}\n"
+        )
 
-            report.write(
-                f"Missing Values,{int(uploaded_df.isnull().sum().sum())}\n\n"
-            )
+        report.write(
+            f"Missing Values,{int(uploaded_df.isnull().sum().sum())}\n\n"
+        )
 
-            report.write(
-                "Numeric Summary\n"
-            )
+        report.write(
+             "Numeric Summary\n"
+        )
 
-            summary.to_csv(
-                report
-            )
+        summary.to_csv(
+            report
+        )
 
-            st.download_button(
-                label=":material/save: Download Summary Report",
-                data=report.getvalue(),
-                file_name="Summary_Report.csv",
-                mime="text/csv"
-            )
+        st.download_button(
+             label=":material/save: Download Summary Report",
+             data=report.getvalue(),
+            file_name="Summary_Report.csv",
+             mime="text/csv"
+        )
 
 
 elif page == "About":
