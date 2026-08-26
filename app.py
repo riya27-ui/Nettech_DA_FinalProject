@@ -924,13 +924,6 @@ elif page == "Dashboard":
         plt.close(fig)
 
         
-
-        st.dataframe(
-            summary,
-            use_container_width=True
-        )
-    
-
         report = StringIO()
 
         report.write(
