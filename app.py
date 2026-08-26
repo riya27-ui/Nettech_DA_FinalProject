@@ -925,14 +925,11 @@ elif page == "Dashboard":
 
         
 
-        st.markdown(
-            "### :material/summarize: Dataset Summary"
-         )
-
         st.dataframe(
             summary,
             use_container_width=True
         )
+    
 
         report = StringIO()
 
