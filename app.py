@@ -635,7 +635,6 @@ elif page == "Dashboard":
                 color=chart_text
             )
 
-    
             ax.set_aspect("equal")
 
             fig.tight_layout(
@@ -922,44 +921,6 @@ elif page == "Dashboard":
         )
 
         plt.close(fig)
-
-        
-        report = StringIO()
-
-        report.write(
-            "NETTECH EMPLOYEE ANALYTICS - SUMMARY REPORT\n\n"
-        )
-
-        report.write(
-            "Dataset Overview\n"
-        )
-
-        report.write(
-            f"Rows,{len(uploaded_df)}\n"
-        )
-
-        report.write(
-            f"Columns,{len(uploaded_df.columns)}\n"
-        )
-
-        report.write(
-            f"Missing Values,{int(uploaded_df.isnull().sum().sum())}\n\n"
-        )
-
-        report.write(
-             "Numeric Summary\n"
-        )
-
-        summary.to_csv(
-            report
-        )
-
-        st.download_button(
-             label=":material/save: Download Summary Report",
-             data=report.getvalue(),
-            file_name="Summary_Report.csv",
-             mime="text/csv"
-        )
 
 
 elif page == "About":
