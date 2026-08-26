@@ -100,7 +100,6 @@ with st.sidebar:
         [
             "Home",
             "Dashboard",
-            "Upload CSV",
             "About"
         ],
         label_visibility="collapsed"
@@ -165,22 +164,9 @@ if page == "Home":
                 "to explore detailed insights."
             )
 
-    with col3:
-        with st.container(border=True):
-            st.markdown(
-                "### :material/upload_file: CSV Analysis"
-            )
-            st.write(
-                "Upload an employee dataset and generate an automated "
-                "summary and visual analysis that makes the data easier "
-                "to understand."
-            )
-
-    st.write("")
-
     st.info(
         "Use the navigation menu on the left to access the Dashboard, "
-        "upload a CSV file, or learn more about the project."
+        "or learn more about the project."
     )
 
 
@@ -937,73 +923,7 @@ elif page == "Dashboard":
 
         plt.close(fig)
 
-
-elif page == "Upload CSV":
-
-    st.title("Upload Employee Dataset")
-
-    st.write(
-        "Upload a CSV file to generate an automatic summary "
-    )
-
-    st.markdown(
-        "### :material/upload_file: Upload CSV File"
-    )
-
-    uploaded_file = st.file_uploader(
-        "Choose & Upload a CSV file",
-        type=["csv"]
-    )
-
-    if uploaded_file is not None:
-
-        uploaded_df = pd.read_csv(uploaded_file)
-
-        st.success("CSV file uploaded successfully.")
-
-        st.markdown(
-            "### :material/description: Dataset Overview"
-        )
-
-        col1, col2, col3 = st.columns(3)
-
-        with col1:
-            st.metric(
-                "Rows",
-                len(uploaded_df)
-            )
-
-        with col2:
-            st.metric(
-                "Columns",
-                len(uploaded_df.columns)
-            )
-
-        with col3:
-            st.metric(
-                "Missing Values",
-                int(uploaded_df.isnull().sum().sum())
-            )
-
-        st.write("")
-
-        st.markdown(
-            "### :material/table_view: Data Preview"
-        )
-
-        st.dataframe(
-            uploaded_df.head(10),
-            use_container_width=True,
-            hide_index=True
-        )
-
-        numeric_columns = uploaded_df.select_dtypes(
-            include=np.number
-        ).columns
-
-        if len(numeric_columns) > 0:
-
-            summary = uploaded_df[numeric_columns].describe().T
+        
 
             st.markdown(
                 "### :material/summarize: Dataset Summary"
