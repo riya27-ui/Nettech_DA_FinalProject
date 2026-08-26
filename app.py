@@ -268,7 +268,7 @@ elif page == "Dashboard":
             f"""
             <div class="kpi-card">
                 <div class="kpi-title">
-                <span style="color:#FACC15;">★</span>
+                <span style="color:#FACC15;">★★★★★</span>
                 Average Performance
                 </div>
                 <div class="kpi-value">{average_performance:.2f}</div>
