@@ -267,7 +267,7 @@ elif page == "Dashboard":
         st.markdown(
             f"""
             <div class="kpi-card">
-                <div class="kpi-title">Average Performance</div>
+                <div class="kpi-title">:material/star: Average Performance</div>
                 <div class="kpi-value">{average_performance:.2f}</div>
             </div>
             """,
